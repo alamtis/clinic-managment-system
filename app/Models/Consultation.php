@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ class Consultation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'start_at', 'end_at', 'purpose', 'patient_id', 'doctor_id'];
+    protected $fillable = ['date', 'object', 'patient_id', 'doctor_id'];
 
     public function patient(): BelongsTo
     {
@@ -26,5 +27,15 @@ class Consultation extends Model
     public function prescription(): HasOne
     {
         return $this->hasOne(Prescription::class);
+    }
+
+    protected function getStartAtAttribute($value): string
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
+    protected function getEndAtAttribute($value): string
+    {
+        return Carbon::parse($value)->format('d/m/Y H:i');
     }
 }

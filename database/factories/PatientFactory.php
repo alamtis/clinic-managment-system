@@ -19,9 +19,14 @@ class PatientFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = fake()->randomElement(['male', 'female']);
+
         return [
-            'user_id' => User::factory(),
-            'doctor_id' => Doctor::factory(),
+            'name' => fake()->name(),
+            'address' => fake()->address(),
+            'phone' => fake()->phoneNumber(),
+            'email' => fake()->unique()->safeEmail(),
+            'gender' => $gender,
             'birthdate' => fake()->dateTimeInInterval('-60 years', '-18 years'),
             'ssin' => fake()->randomNumber(9, true)
         ];

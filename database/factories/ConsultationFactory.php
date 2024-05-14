@@ -20,12 +20,9 @@ class ConsultationFactory extends Factory
      */
     public function definition(): array
     {
-        $consultationTime = fake()->dateTimeBetween('+1 week', '12 weeks');
         return [
-            'date' => fake()->date('d/m/y'),
-            'start_at' => $consultationTime,
-            'end_at' => Carbon::parse($consultationTime)->addHour(),
-            'purpose' => fake()->sentence(),
+            'date' => fake()->dateTimeBetween('now', '+1 year'),
+            'object' => fake()->sentence(),
             'patient_id' => Patient::factory(),
             'doctor_id' => Doctor::factory()
         ];

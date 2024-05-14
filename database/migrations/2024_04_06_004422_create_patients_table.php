@@ -12,8 +12,11 @@ return new class extends Migration {
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('doctor_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('gender');
             $table->string('birthdate');
             $table->string('ssin'); // social security identification number
             $table->timestamps();

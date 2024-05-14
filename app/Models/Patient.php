@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,12 +12,9 @@ class Patient extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'doctor_id', 'birthdate', 'ssin'];
+    protected $fillable = ['name', 'address', 'phone', 'email', 'gender',  'birthdate', 'ssin'];
 
-    public function doctor(): BelongsTo
-    {
-        return $this->belongsTo(Doctor::class);
-    }
+
 
     public function consultations(): HasMany
     {
@@ -26,5 +24,9 @@ class Patient extends Model
     public function pathology(): BelongsTo
     {
         return $this->belongsTo(Pathology::class);
+    }
+
+    protected function getAgeAttribute() {
+        return Carbon::parse($this->attributes['birthdate'])->age;
     }
 }

@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->time('start_at');
-            $table->time('end_at');
-            $table->string('purpose')->nullable();
+            $table->string('object')->nullable();
             $table->foreignId('patient_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('doctor_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
