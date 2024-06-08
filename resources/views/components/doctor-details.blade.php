@@ -1,34 +1,23 @@
-@props(['patient'])
+@props(['doctor'])
 <tr class="text-gray-700 dark:text-gray-400">
-    <td class="px-4 py-3">
-        <div class="flex items-center text-sm">
-            <div>
-                <p class="font-semibold">
-                    {{ $patient->name }}
-                </p>
-                <p class="text-xs text-gray-600 dark:text-gray-400">
-                    {{ $patient->address }}
-                </p>
-                <p class="text-xs text-gray-600 dark:text-gray-400">
-                    <span class="font-bold text-blue-400">SSN: </span>
-                    {{ $patient->ssin }}
-                </p>
-            </div>
-        </div>
+    <td class="px-4 py-3 font-semibold">
+
+                    {{ $doctor->user->name }}
+
     </td>
-    <td class="px-4 py-3 text-sm uppercase">
-        {{ $patient->gender }}
+    <td class="px-4 py-3 text-sm text-cyan-400 dark:text-cyan-400">
+        {{ $doctor->specialization }}
     </td>
     <td class="px-4 py-3 text-sm">
-        {{ \Carbon\Carbon::parse($patient->age)->age }}
+        {{ $doctor->user->email }}
     </td>
     <td class="px-4 py-3 text-sm ">
-        {{ $patient->email }}
+        {{ $doctor->user->phone }}
     </td>
     <td class="px-4 py-3">
         <div class="flex items-center space-x-4 text-sm">
             <a
-                    href="{{ route('patients.edit', $patient) }}"
+                    href="{{ route('doctors.edit', $doctor) }}"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit">
                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -36,7 +25,7 @@
                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                 </svg>
             </a>
-            <form method="POST" action="{{ route('patients.destroy', $patient) }}">
+            <form method="POST" action="{{ route('doctors.destroy', $doctor) }}">
                 @csrf
                 @method('DELETE')
                 <button

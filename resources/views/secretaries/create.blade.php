@@ -3,6 +3,7 @@
     <form method="POST" action="{{ route('secretaries.store') }}">
         @csrf
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <x-errors :errors="$errors"></x-errors>
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Full name</span>
                 <input
@@ -58,11 +59,11 @@
                 </span>
                 <select
                     class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    name="gender"
+                    name="doctor"
                 >
-                    @for($doctors as $doctor)
+                    @foreach($doctors as $doctor)
                         <option value="{{ $doctor->id }}"> {{ $doctor->user->name }}</option>
-                    @endfor
+                    @endforeach
                 </select>
             </label>
             <button

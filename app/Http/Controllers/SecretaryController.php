@@ -14,7 +14,7 @@ class SecretaryController extends Controller
      */
     public function index()
     {
-        $secretaries = Secretary::with('user')->paginate(5);
+        $secretaries = Secretary::with('user', 'doctor')->paginate(5);
         return view('secretaries.index', ['secretaries' => $secretaries]);
     }
 
@@ -39,12 +39,12 @@ class SecretaryController extends Controller
             'email' => 'required',
             'phone' => 'required',
             'password' => 'required',
-            'doctor_id' => 'required'
+            'doctor' => 'required'
         ]);
-
+        $name = explode(' ', $request->name);
         $user = User::create([
-            'first_name' => explode(' ', $request->name)[0],
-            'last_name' => explode(' ', $request->name)[1],
+            'first_name' => $name[0],
+            'last_name' => $name[1],
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'phone' => $request->phone,
@@ -54,7 +54,7 @@ class SecretaryController extends Controller
 
         Secretary::create([
             'user_id' => $user->id,
-            'doctor_id' => $request->doctor_id
+            'doctor_id' => $request->doctor
         ]);
 
         return redirect()->route('secretaries.index');
@@ -65,15 +65,42 @@ class SecretaryController extends Controller
      */
     public function edit(Secretary $secretary)
     {
-        return view('secretaries.edit', ['secretary' => $secretary]);
+        $doctors = Doctor::with('user')->get();
+        return view('secretaries.edit', [
+            'secretary' => $secretary,
+            'doctors' => $doctors
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Secretary $secretary)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'doctor' => 'required'
+        ]);
+        $name = explode(' ', $request->name);
+        $secretary->user()->update([
+            'first_name' => $name[0],
+            'last_name' => $name[1],
+            'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : $secretary->user->password,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender' => $request->gender
+        ]);
+
+        $secretary->update([
+            'doctor_id' => $request->doctor
+        ]);
+
+        return redirect()->route('secretaries.index');
     }
 
     /**

@@ -1,13 +1,14 @@
 <x-app-layout>
     <x-slot:title>
-        Patients
+        Secretaries
     </x-slot:title>
     <div class="flex justify-between my-4">
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-            Table with actions
+            Secretaries table
         </h4>
         <a href="{{ route('secretaries.create') }}"
-           class="flex items-center justify-between  px-3 text-sm font-medium text-white transition-colors duration-150 border border-transparent rounded-lg active:bg-purple-600 bg-purple-700 focus:outline-none focus:shadow-outline-purple">Nouveau
+           class="flex items-center justify-between  px-3 text-sm font-medium text-white transition-colors duration-150 border border-transparent rounded-lg active:bg-purple-600 bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            New
             <span class="ml-2">+</span></a>
     </div>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -16,8 +17,9 @@
                 <thead>
                 <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Age</th>
                     <th class="px-4 py-3">Gender</th>
+                    <th class="px-4 py-3">Email</th>
+                    <th class="px-4 py-3">Phone</th>
                     <th class="px-4 py-3">Actions</th>
                 </tr>
                 </thead>

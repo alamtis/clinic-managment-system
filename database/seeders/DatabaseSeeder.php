@@ -14,6 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       Consultation::factory(20)->create();
+        $this->call([
+            AdminUserSeeder::class,
+            UsersTableSeeder::class,
+            DoctorsTableSeeder::class,
+            SecretariesTableSeeder::class,
+            PatientsTableSeeder::class,
+            ConsultationsTableSeeder::class
+        ]);
     }
 }

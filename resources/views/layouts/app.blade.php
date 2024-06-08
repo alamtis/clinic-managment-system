@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }" x-data="data" lang="en">
+<html :class="{ 'theme-dark': dark }" x-data="data" x-init="init" lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -49,7 +49,7 @@
                     </x-slot:icon>
                     Dashboard
                 </x-nav-link>
-                <x-nav-link href="{{ route('consultations.index') }}" active="{{ request()->is('consultations') }}">
+                <x-nav-link href="{{ route('consultations.index') }}" active="{{ request()->is('consultations*') }}">
                     <x-slot:icon>
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                              stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,13 +59,31 @@
                     </x-slot:icon>
                     Consultations
                 </x-nav-link>
-                <x-nav-link href="{{ route('patients.index') }}" active="{{ request()->is('patients') }}">
+                <x-nav-link href="{{ route('patients.index') }}" active="{{ request()->is('patients*') }}">
                     <x-slot:icon>
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                         </svg>
                     </x-slot:icon>
                     Patients
+                </x-nav-link>
+                <x-nav-link href="{{ route('secretaries.index') }}" active="{{ request()->is('secretaries*') }}">
+                    <x-slot:icon>
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                    </x-slot:icon>
+                    Secretaries
+                </x-nav-link>
+                <x-nav-link href="{{ route('doctors.index') }}" active="{{ request()->is('doctors*') }}">
+                    <x-slot:icon>
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M12 12c2.209 0 4-1.791 4-4V6a4 4 0 00-8 0v2c0 2.209 1.791 4 4 4z"></path>
+                            <path d="M12 12v5.5c0 1.656-1.344 3-3 3s-3-1.344-3-3V18a1 1 0 00-2 0v-.5c0 2.485 2.015 4.5 4.5 4.5s4.5-2.015 4.5-4.5V12"></path>
+                            <path d="M15 12v5.5c0 1.656 1.344 3 3 3s3-1.344 3-3V18a1 1 0 012 0v-.5c0 2.485-2.015 4.5-4.5 4.5s-4.5-2.015-4.5-4.5V12"></path>
+                        </svg>
+                    </x-slot:icon>
+                    Doctors
                 </x-nav-link>
             </ul>
         </div>
@@ -81,7 +99,8 @@
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
-    ></div>
+    >
+    </div>
     <aside
         class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden"
         x-show="isSideMenuOpen"
@@ -102,7 +121,7 @@
                 Clinique
             </a>
             <ul class="mt-6">
-                <x-nav-link href="index.html" :active="true">
+                <x-nav-link href="index.html" active="{{ request()->is('dashboard') }}">
                     <x-slot:icon>
                         <svg
                             class="w-5 h-5"
@@ -121,16 +140,33 @@
                     </x-slot:icon>
                     Dashboard
                 </x-nav-link>
-
+                <x-nav-link href="{{ route('consultations.index') }}" active="{{ request()->is('consultations*') }}">
+                    <x-slot:icon>
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </x-slot:icon>
+                    Consultations
+                </x-nav-link>
+                <x-nav-link href="{{ route('patients.index') }}" active="{{ request()->is('patients*') }}">
+                    <x-slot:icon>
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </x-slot:icon>
+                    Patients
+                </x-nav-link>
+                <x-nav-link href="{{ route('secretaries.index') }}" active="{{ request()->is('secretaries*') }}">
+                    <x-slot:icon>
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                    </x-slot:icon>
+                    Secretaries
+                </x-nav-link>
             </ul>
-            <div class="px-6 my-6">
-                <button
-                    class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                >
-                    Create account
-                    <span class="ml-2" aria-hidden="true">+</span>
-                </button>
-            </div>
         </div>
     </aside>
     <div class="flex flex-col flex-1 w-full">
@@ -179,7 +215,7 @@
                         <input
                             class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                             type="text"
-                            placeholder="Search for projects"
+                            placeholder="Search"
                             aria-label="Search"
                         />
                     </div>
@@ -192,7 +228,7 @@
                             @click="toggleTheme"
                             aria-label="Toggle color mode"
                         >
-                            <template x-if="!dark">
+                            <div x-show="!dark">
                                 <svg
                                     class="w-5 h-5"
                                     aria-hidden="true"
@@ -203,8 +239,8 @@
                                         d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
                                     ></path>
                                 </svg>
-                            </template>
-                            <template x-if="dark">
+                            </div>
+                            <div x-show="dark">
                                 <svg
                                     class="w-5 h-5"
                                     aria-hidden="true"
@@ -217,7 +253,7 @@
                                         clip-rule="evenodd"
                                     ></path>
                                 </svg>
-                            </template>
+                            </div>
                         </button>
                     </li>
                     <!-- Notifications menu -->
@@ -245,7 +281,7 @@
                                 class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"
                             ></span>
                         </button>
-                        <template x-if="isNotificationsMenuOpen">
+                        <div x-show="isNotificationsMenuOpen">
                             <ul
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100"
@@ -289,7 +325,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </template>
+                        </div>
                     </li>
                     <!-- Profile menu -->
                     <li class="relative">
@@ -307,7 +343,7 @@
                                 aria-hidden="true"
                             />
                         </button>
-                        <template x-if="isProfileMenuOpen">
+                        <div x-show="isProfileMenuOpen">
                             <ul
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100"
@@ -339,33 +375,35 @@
                                         <span>Profile</span>
                                     </a>
                                 </li>
+{{--                                <li class="flex">--}}
+{{--                                    <a--}}
+{{--                                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"--}}
+{{--                                        href="#"--}}
+{{--                                    >--}}
+{{--                                        <svg--}}
+{{--                                            class="w-4 h-4 mr-3"--}}
+{{--                                            aria-hidden="true"--}}
+{{--                                            fill="none"--}}
+{{--                                            stroke-linecap="round"--}}
+{{--                                            stroke-linejoin="round"--}}
+{{--                                            stroke-width="2"--}}
+{{--                                            viewBox="0 0 24 24"--}}
+{{--                                            stroke="currentColor"--}}
+{{--                                        >--}}
+{{--                                            <path--}}
+{{--                                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"--}}
+{{--                                            ></path>--}}
+{{--                                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>--}}
+{{--                                        </svg>--}}
+{{--                                        <span>Settings</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="flex">
-                                    <a
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+
+                                    <button
                                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                        href="#"
-                                    >
-                                        <svg
-                                            class="w-4 h-4 mr-3"
-                                            aria-hidden="true"
-                                            fill="none"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                                            ></path>
-                                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li class="flex">
-                                    <a
-                                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                        href="#"
                                     >
                                         <svg
                                             class="w-4 h-4 mr-3"
@@ -382,10 +420,11 @@
                                             ></path>
                                         </svg>
                                         <span>Log out</span>
-                                    </a>
+                                    </button>
+                                    </form>
                                 </li>
                             </ul>
-                        </template>
+                        </div>
                     </li>
                 </ul>
             </div>

@@ -8,9 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Secretary extends Model
 {
-    public function doctors(): BelongsToMany
+    protected $fillable = [
+        'user_id',
+        'doctor_id'
+    ];
+    public function user()
     {
-        return $this->belongsToMany(Doctor::class);
+        return $this->belongsTo(User::class);
+    }
+    public function doctor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Doctor::class);
     }
 
 }

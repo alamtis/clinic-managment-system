@@ -5,7 +5,7 @@
         @method('PUT')
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Nom complet</span>
+                <span class="text-gray-700 dark:text-gray-400">Name</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     name="name"
@@ -13,20 +13,20 @@
                     placeholder="Jane Doe">
             </label>
             <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Adresse</span>
+                <span class="text-gray-700 dark:text-gray-400">Address</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     name="address"
                     value="{{ $patient->address }}"
-                    placeholder="Address">
+                    placeholder="123 Main St">
             </label>
             <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Téléphone</span>
+                <span class="text-gray-700 dark:text-gray-400">Phone</span>
                 <input
                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     name="phone"
                     value="{{ $patient->phone }}"
-                    placeholder="Téléphone">
+                    placeholder="+2126 123 456 78">
             </label>
             <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Email</span>
@@ -35,7 +35,7 @@
                     type="email"
                     name="email"
                     value="{{ $patient->email }}"
-                    placeholder="Email">
+                    placeholder="aY0kz@example.com">
             </label>
 
             <label class="block mt-4 text-sm">

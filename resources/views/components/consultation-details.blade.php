@@ -6,6 +6,7 @@
             <div>
                 <p class="font-semibold">{{ $consultation->patient->name }}</p>
                 <p class="text-xs text-gray-600 dark:text-gray-400">
+                    <span class="font-bold text-green-400">Object:</span>
                     {{ $consultation->object }}
                 </p>
             </div>
@@ -16,6 +17,7 @@
     </td>
     <td class="px-4 py-3 text-sm">
         {{ $consultation->doctor->user->name }}
+        <span class="block text-cyan-400 text-xs">({{ $consultation->doctor->specialization }})</span>
     </td>
     <td class="px-4 py-3 text-xs">
                         <span
